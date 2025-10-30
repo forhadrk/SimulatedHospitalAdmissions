@@ -128,9 +128,7 @@ def single_patient_prediction(model_artifacts):
         severity_score = st.slider("Severity Score (1-10)", 1, 10, 5)
         length_of_stay = st.slider("Length of Stay (days)", 1, 30, 7)
         admission_date = st.date_input("Admission Date", datetime.now())
-    
-    with col3:
-        # Display prediction when button is clicked
+
         if st.button("Predict Readmission Risk", type="primary"):
             # Create input dataframe
             input_data = pd.DataFrame({
@@ -144,6 +142,10 @@ def single_patient_prediction(model_artifacts):
                 'Length_of_Stay': [length_of_stay],
                 'Admission_Date': [admission_date.strftime('%Y-%m-%d')]
             })
+    
+    with col3:
+        # Display prediction when button is clicked
+        
             
             # Make prediction
             predictions, probabilities = make_prediction(input_data, model_artifacts)
